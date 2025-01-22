@@ -1,7 +1,8 @@
 #include QMK_KEYBOARD_H
 
 enum sofle_layers {
-    _QWERTY,
+    _QWERTYM,
+    _QWERTYW,
     _ARROW,
     _NUMBER
 };
@@ -13,7 +14,7 @@ enum custom_keycodes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*
-* QWERTY
+* QWERTY Mac
 * ,-----------------------------------------.                    ,-----------------------------------------.
 * |   `  |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |   -  |
 * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
@@ -23,16 +24,39 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 * |------+------+------+------+------+------|  play |    | mute  |------+------+------+------+------+------|
 * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |RShift|
 * `-----------------------------------------/       /     \      \-----------------------------------------'
-*            |Hyper | LAltc | LCTR| LGUI | / SPACE /       \ Enter\  |_ARROW| _NUM | RCTR | DEL |
+*            |Hyper | LALT | LCTR | LGUI | / SPACE /       \ Enter\  |_ARROW| _NUM | Win  | DEL |
 *            `------------------------------------'         '-----------------------------------'
 */
 
-[_QWERTY] = LAYOUT(
+[_QWERTYM] = LAYOUT(
   KC_GRV,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_MINS,
   KC_ESC,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,  KC_BSPC,
   KC_TAB,   KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                    KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN,  KC_QUOT,
   KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_MPLY,  KC_MUTE, KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_RSFT,
-              KC_HYPR,KC_LEFT_ALT,KC_LCTL, KC_LGUI, KC_SPC,       KC_ENT, MO(_ARROW), MO(_NUMBER), KC_RCTL, LGUI(KC_BSPC)
+              KC_HYPR,KC_LEFT_ALT,KC_LCTL, KC_LGUI, KC_SPC,       KC_ENT, MO(_ARROW), MO(_NUMBER), DF(_QWERTYW), LGUI(KC_BSPC)
+),
+
+/*
+* QWERTY Windows
+* ,-----------------------------------------.                    ,-----------------------------------------.
+* |   `  |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |   -  |
+* |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+* | Esc  |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  |  BS  |
+* |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+* | Tab  |   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   ;  |  '   |
+* |------+------+------+------+------+------|  play |    | mute  |------+------+------+------+------+------|
+* |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |RShift|
+* `-----------------------------------------/       /     \      \-----------------------------------------'
+*            |Hyper | LGUI | LALT | LCTR | / SPACE /       \ Enter\  |_ARROW| _NUM | Mac  | DEL |
+*            `------------------------------------'         '-----------------------------------'
+*/
+
+[_QWERTYW] = LAYOUT(
+  KC_GRV,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_MINS,
+  KC_ESC,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,  KC_BSPC,
+  KC_TAB,   KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                    KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN,  KC_QUOT,
+  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_MPLY,  KC_MUTE, KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_RSFT,
+              KC_HYPR,KC_LGUI,KC_LEFT_ALT,KC_LCTL, KC_SPC,       KC_ENT, MO(_ARROW), MO(_NUMBER), DF(_QWERTYM), KC_BSPC
 ),
 
 /* ARROW
@@ -41,18 +65,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      |  F11 |  F12 |   [  |   ]  |   \  |                    |      | HOME |  Up  |  END |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |  F13 |  F14 |   {  |   }  |   |  |-------.    ,-------|  PUp | Left | Down | Rigth| PDown|      |
+ * |      |  F13 |  F14 |   {  |   }  |   |  |-------.    ,-------|      | Left | Down | Rigth|      |      |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
- * |      |  F15 |  F16 |   <  |   >  |   =  |-------|    |-------|   +  | CLeft|      |CRigth|      |      |
+ * |      |  F15 |  F16 |   <  |   >  |   =  |-------|    |-------|   +  |      |      |      |      |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *            |      |      |      |      | /       /       \      \ |      |      |     |      |
  *            `------------------------------------'         '----------------------------------'
  */
 [_ARROW] = LAYOUT(
-  _______,  KC_F1,  KC_F2,    KC_F3,   KC_F4,   KC_F5,                         KC_F6,         KC_F7,   KC_F8,         KC_F9,  KC_F10,  _______,
-  _______, KC_F11, KC_F12,  KC_LBRC, KC_RBRC, KC_BSLS,                       _______,       KC_HOME,   KC_UP,        KC_END, _______,  _______,
-  _______, KC_F13, KC_F14, KC_LCBR,  KC_RCBR, KC_PIPE,                       KC_PGUP,       KC_LEFT, KC_DOWN,       KC_RGHT, KC_PGDN,  _______,
-  _______, KC_F15, KC_F16,   KC_LT,    KC_GT,  KC_EQL, _______,     _______, KC_PPLS, LALT(KC_LEFT), _______, LALT(KC_RGHT), _______,  _______,
+  _______,  KC_F1,  KC_F2,    KC_F3,   KC_F4,   KC_F5,                         KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  _______,
+  _______, KC_F11, KC_F12,  KC_LBRC, KC_RBRC, KC_BSLS,                       _______, KC_HOME,   KC_UP,  KC_END, _______,  _______,
+  _______, KC_F13, KC_F14, KC_LCBR,  KC_RCBR, KC_PIPE,                       _______, KC_LEFT, KC_DOWN, KC_RGHT, _______,  _______,
+  _______, KC_F15, KC_F16,   KC_LT,    KC_GT,  KC_EQL, _______,     _______, KC_PPLS, _______, _______, _______, _______,  _______,
                 _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______
 ),
 
@@ -237,9 +261,6 @@ static void print_status_narrow(void) {
     oled_set_cursor(0, 7);
 
     switch (get_highest_layer(layer_state)) {
-        case _QWERTY:
-            oled_write("Base ", false);
-            break;
         case _NUMBER:
             oled_write("Num  ", false);
             break;
@@ -247,7 +268,7 @@ static void print_status_narrow(void) {
             oled_write("Arrow", false);
             break;
         default:
-            oled_write("Undef", false);
+            oled_write("Base ", false);
     }
 
     oled_set_cursor(0, 9);
@@ -312,7 +333,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case KC_QWERTY:
             if (record->event.pressed) {
-                set_single_persistent_default_layer(_QWERTY);
+                set_single_persistent_default_layer(_QWERTYM);
             }
             return false;
         case KC_COPY:

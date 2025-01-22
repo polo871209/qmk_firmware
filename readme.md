@@ -11,6 +11,7 @@ This is a keyboard firmware based on the [tmk_keyboard firmware](https://github.
 ## [My Keyboard](https://github.com/polo871209/qmk_firmware/tree/solfe/keyboards/sofle/keymaps/polo871209)
 
 ```bash
+git clone --recurse-submodules git@github.com:polo871209/qmk_firmware.git
 qmk compile -kb sofle/rev1 -km polo871209
 ```
 
