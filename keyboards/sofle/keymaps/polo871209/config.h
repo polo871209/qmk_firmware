@@ -1,0 +1,8 @@
+#pragma once
+
+#define SPLIT_USB_DETECT
+#define SPLIT_WATCHDOG_ENABLE
+#define SPLIT_WPM_ENABLE
+
+#undef ENCODER_RESOLUTION
+#define ENCODER_RESOLUTION 4
